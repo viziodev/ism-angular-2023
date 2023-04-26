@@ -1,0 +1,111 @@
+<section class="h-50" style="background-color: #eee">
+  <div class="container py-5 h-75">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col">
+        <div class="card">
+          <div class="card-body p-4">
+            <div class="row">
+              <div class="col-lg-7">
+                <h5 class="mb-3">
+                  <a href="#!" class="text-body"
+                    ><i class="fas fa-long-arrow-alt-left me-2"></i>Commande du
+                    Client
+                  </a>
+                </h5>
+                <hr />
+                <div
+                  class="d-flex justify-content-between align-items-center mb-4"
+                >
+                  <div>
+                    <p class="mb-1">Mon Panier</p>
+                    <p class="mb-0">
+                      Vouz avez {{ panier.products.length }} produits dans votre
+                      panier
+                    </p>
+                  </div>
+                  <div>
+                    <p class="mb-0">
+                      <span class="text-muted">Trier by:</span>
+                      <a href="#!" class="text-body"
+                        >price <i class="fas fa-angle-down mt-1"></i
+                      ></a>
+                    </p>
+                  </div>
+                </div>
+                <div class="card mb-3" *ngFor="let p of panier.products">
+                  <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                      <div class="d-flex flex-row align-items-center">
+                        <div class="ms-3">
+                          <h5>{{ p.libelle }}</h5>
+                          <p class="small mb-0">
+                            {{ p.qteStock }}, {{ p.libelle }}
+                          </p>
+                        </div>
+                      </div>
+                      <div class="d-flex flex-row align-items-center">
+                        <div style="width: 50px">
+                          <h5 class="fw-normal mb-0">{{ p.qteComd }}</h5>
+                        </div>
+                        <div style="width: 80px">
+                          <h5 class="mb-0">${{ p.newPrice }}</h5>
+                        </div>
+                        <a href="#!" style="color: #cecece"
+                          ><i class="fas fa-trash-alt"></i
+                        ></a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-5">
+                <div class="card bg-light text-dark rounded-3 h-100">
+                  <div class="card-body">
+                    <div
+                      class="d-flex justify-content-between align-items-center mb-4"
+                    >
+                      <h5 class="mb-0">RÉSUMÉ DU PANIER</h5>
+                      <img
+                        src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-6.webp"
+                        class="img-fluid rounded-3"
+                        style="width: 45px"
+                        alt="Avatar"
+                      />
+                    </div>
+
+                    <div class="d-flex justify-content-between">
+                      <p class="mb-2">Montant HTVA</p>
+                      <p class="mb-2">${{ panier.totalHtc }}</p>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                      <p class="mb-2">TVA</p>
+                      <p class="mb-2">${{ panier.tva }}</p>
+                    </div>
+                    <div class="d-flex justify-content-between mb-4">
+                      <p class="mb-2">Total(Incl. tva)</p>
+                      <p class="mb-2">${{ panier.totalTtc }}</p>
+                    </div>
+                    <a
+                      type="button"
+                      class="btn btn-info btn-block btn-lg"
+                      [routerLink]="['/securite/login']"
+                      [queryParams]="{ page: 'panier' }"
+                    >
+                      <div class="d-flex justify-content-between">
+                        <span>${{ panier.totalTtc }}</span>
+                        <span
+                          >Terminer la Commande
+                          <i class="fas fa-long-arrow-alt-right ms-2"></i
+                        ></span>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

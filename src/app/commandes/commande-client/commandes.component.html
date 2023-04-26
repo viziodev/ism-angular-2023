@@ -1,0 +1,133 @@
+<ng-container *ngIf="commandesClient.length>0">
+<section class="h-50" style="background-color: #eee">
+  <div class="container py-5 h-75">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col">
+        <div class="card">
+          <div class="card-body p-4">
+            <div class="row">
+              <div class="col-lg-7">
+                <h5 class="mb-3">
+                  <a href="#!" class="text-body"
+                    ><i class="fas fa-long-arrow-alt-left me-2"></i> Commande du
+                    Client </a
+                  >{{ commandesClient[0].client?.nomComplet }}
+                </h5>
+                <hr />
+                <div
+                  class="d-flex justify-content-between align-items-center mb-4"
+                >
+                  <div>
+                    <p class="mb-1">Mes Commandes</p>
+                    <p class="mb-0">
+                      Tu as {{ commandesClient.length }} Commandes
+                    </p>
+                  </div>
+                  <div>
+                    <p class="mb-0">
+                      <span class="text-muted">Trier(Pipe):</span>
+                      <a href="#!" class="text-body"
+                        >price <i class="fas fa-angle-down mt-1"></i
+                      ></a>
+                    </p>
+                  </div>
+                </div>
+                <div class="card mb-3" *ngFor="let cmd of commandesClient">
+                  <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                      <div class="d-flex flex-row align-items-center">
+                        <div class="ms-3">
+                          <h5 (click)="onDetailCommande(cmd)">
+                            {{ cmd.date | date : "d/M/yyyy" }}
+                          </h5>
+
+                          <p class="small mb-0">Total:{{ cmd.totalHtc }}</p>
+                        </div>
+                      </div>
+                      <div class="d-flex flex-row align-items-center">
+                        <div style="width: 50px">
+                          <h5 class="fw-normal mb-0">
+                            {{ cmd.products.length }}
+                          </h5>
+                        </div>
+                        <div style="width: 100px">
+                          <h5 class="mb-0">${{ cmd.totalTtc }}</h5>
+                        </div>
+                        <a href="#!" style="color: #cecece"
+                          ><i class="fas fa-trash-alt"></i
+                        ></a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-5">
+                <div class="card bg-light text-dark rounded-3 h-100">
+                  <div class="card-body" *ngIf="detailCommande; else blockElse">
+                    <div
+                      class="d-flex justify-content-between align-items-center mb-4"
+                    >
+                      <h5 class="mb-0">
+                        Details Commande
+                        {{ detailCommande.date | date : "d/M/yyyy" }}
+                      </h5>
+                      <img
+                        src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-6.webp"
+                        class="img-fluid rounded-3"
+                        style="width: 45px"
+                        alt="Avatar"
+                      />
+                    </div>
+
+                    <div class="table-responsive">
+                      <table class="table table-primary">
+                        <thead>
+                          <tr>
+                            <th scope="col">Article</th>
+                            <th scope="col">QteCom</th>
+                            <th scope="col">Prix</th>
+                            <th scope="col">Montant</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr
+                            class=""
+                            *ngFor="let p of detailCommande.products"
+                          >
+                            <td scope="row">{{ p.libelle }}</td>
+                            <td>{{ p.qteComd }}</td>
+                            <td>{{ p.newPrice }}</td>
+                            <td>{{ (p.newPrice ?? 0) * (p.qteComd ?? 0) }}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+
+                    <div class="d-flex justify-content-between">
+                      <p class="mb-2">Total HTVA</p>
+                      <p class="mb-2">${{ detailCommande.totalHtc }}</p>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                      <p class="mb-2">TVA</p>
+                      <p class="mb-2">${{ detailCommande.tva }}</p>
+                    </div>
+                    <div class="d-flex justify-content-between mb-4">
+                      <p class="mb-2">Total(Incl. Tva)</p>
+                      <p class="mb-2">${{ detailCommande.totalTtc }}</p>
+                    </div>
+                  </div>
+                  <ng-template #blockElse>
+                    <div class="alert alert-info m-4" role="alert">
+                      Zone d'affichage des details d'une commande
+                    </div>
+                  </ng-template>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</ng-container>
